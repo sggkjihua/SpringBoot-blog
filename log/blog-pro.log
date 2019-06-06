@@ -1,0 +1,5 @@
+2019-06-07 03:01:44.498  INFO 18464 --- [restartedMain] com.xiaolin.blog.BlogApplication         : Starting BlogApplication on DESKTOP-A6G3VIO with PID 18464 (E:\Spring_blog\target\classes started by Think in E:\Spring_blog)
+2019-06-07 03:01:44.502  INFO 18464 --- [restartedMain] com.xiaolin.blog.BlogApplication         : The following profiles are active: pro
+2019-06-07 03:01:47.334  WARN 18464 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-07 03:01:47.426  WARN 18464 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-07 03:01:47.636  INFO 18464 --- [restartedMain] com.xiaolin.blog.BlogApplication         : Started BlogApplication in 3.879 seconds (JVM running for 5.621)
