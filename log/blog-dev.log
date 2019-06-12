@@ -669,3 +669,32 @@ Caused by: java.net.ConnectException: Connection refused: connect
 2019-06-13 03:47:45.312  INFO 11788 --- [http-nio-8080-exec-2] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/12/jihua', method='com.xiaolin.blog.controller.IndexController:index', args=[12, jihua]}
 2019-06-13 03:47:45.316  INFO 11788 --- [http-nio-8080-exec-2] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
 2019-06-13 03:47:45.316  INFO 11788 --- [http-nio-8080-exec-2] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-13 06:00:30.621  INFO 10112 --- [restartedMain] com.xiaolin.blog.BlogApplication         : Starting BlogApplication on DESKTOP-A6G3VIO with PID 10112 (E:\Spring_blog\target\classes started by Think in E:\Spring_blog)
+2019-06-13 06:00:30.625 DEBUG 10112 --- [restartedMain] com.xiaolin.blog.BlogApplication         : Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-06-13 06:00:30.628  INFO 10112 --- [restartedMain] com.xiaolin.blog.BlogApplication         : The following profiles are active: dev
+2019-06-13 06:00:30.802  INFO 10112 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-06-13 06:00:30.802  INFO 10112 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-06-13 06:00:32.739  INFO 10112 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-13 06:00:32.757  INFO 10112 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12ms. Found 0 repository interfaces.
+2019-06-13 06:00:33.166  INFO 10112 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bcfd77c5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-13 06:00:33.713  INFO 10112 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-06-13 06:00:33.739  INFO 10112 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-06-13 06:00:33.739  INFO 10112 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.19]
+2019-06-13 06:00:33.849  INFO 10112 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-06-13 06:00:33.849  INFO 10112 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3047 ms
+2019-06-13 06:00:34.019  INFO 10112 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-06-13 06:00:34.115  INFO 10112 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-06-13 06:00:34.185  INFO 10112 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-13 06:00:34.256  INFO 10112 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.10.Final}
+2019-06-13 06:00:34.258  INFO 10112 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-06-13 06:00:34.353  INFO 10112 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-06-13 06:00:34.435  INFO 10112 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-06-13 06:00:36.478  INFO 10112 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-13 06:00:36.562  INFO 10112 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-06-13 06:00:36.926  INFO 10112 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-13 06:00:36.996  WARN 10112 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-13 06:00:37.145  INFO 10112 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-06-13 06:00:37.333  INFO 10112 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-06-13 06:00:37.337  INFO 10112 --- [restartedMain] com.xiaolin.blog.BlogApplication         : Started BlogApplication in 7.372 seconds (JVM running for 8.945)
