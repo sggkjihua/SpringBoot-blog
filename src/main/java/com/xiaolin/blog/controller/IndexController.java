@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/{id}/{name}")
-    public String index(@PathVariable int id, @PathVariable String name) {
+    @RequestMapping("/")
+    public String index() {
         /*
         // 用来进行异常的检测
         String blog = null;
@@ -16,8 +16,34 @@ public class IndexController {
             throw new NotFoundException("Blog does not exist");
         }
         */
-        System.out.println(id + " 喜欢郭晓林 "+name);
         return "index";
     }
+
+    @RequestMapping("/categories")
+    public String categories() {
+        return "types";
+    }
+
+    @RequestMapping("/tags")
+    public String tags() {
+        return "tags";
+    }
+
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @RequestMapping("/archives")
+    public String archives() {
+        return "archives";
+    }
+
+    @RequestMapping("/blog")
+    public String blog() {
+        return "blog";
+    }
+
+
 
 }

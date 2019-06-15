@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MainPage</title>
+    <title>Blog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../static/css/navigation.css">
     <!--typo css dependency-->
@@ -619,7 +619,7 @@ h5,h6{font-size:1em;}
     <br>
     <br>
     <!--footer-->
-    <footer class="ui inverted vertical segment m-padded-tb-maxi" id="footer">
+    <footer th:replace="_fragments::footer" class="ui inverted vertical segment m-padded-tb-maxi" id="footer">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
@@ -654,16 +654,17 @@ h5,h6{font-size:1em;}
         </div>
     </footer>
 
+<th:block th:replace="_fragments::script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--scroll to top -->
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+    <!--code-->
+    <script src="../static/lib/prism/prism.js" th:src="/lib/prism/prism.js"></script>
+    <!--menu-->
+    <script src="../static/lib/menu-tocbot/tocbot.js" th:src="/lib/menu-tocbot/tocbot.js"></script>
+</th:block>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<!--scroll to top -->
-<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-
-<!--code-->
-<script src="../static/lib/prism/prism.js"></script>
-<!--menu-->
-<script src="../static/lib/menu-tocbot/tocbot.js"></script>
 <script>
 $('#payButton').popup({
     popup: ('.pay.popup'),
