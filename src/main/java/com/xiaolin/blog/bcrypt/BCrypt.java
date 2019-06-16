@@ -763,6 +763,7 @@ public class BCrypt {
 
 
 
+    /*
     public static void main(String[] args){
         String password = "202020";
         // Hash a password for the first time
@@ -780,4 +781,5 @@ public class BCrypt {
         else
             System.out.println("It does not match");
     }
+    */
 }
