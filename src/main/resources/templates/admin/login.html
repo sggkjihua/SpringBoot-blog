@@ -37,8 +37,7 @@
                 </div>
 
                 <div class="ui error message"></div>
-                <div class="ui mini message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">Auth failed</div>
-
+                <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">Auth failed</div>
             </form>
         </div>
     </div>
