@@ -37,14 +37,22 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" class="item">Publish</a>
-                <a href="" class="teal active item">List</a>
+                <a href="" th:href="@{/admin/categories/create}" class="item">Publish</a>
+                <a href="" th:href="@{/admin/categories}" class="teal active item">List</a>
             </div>
         </div>
     </div>
 
     <!--content-->
     <div class = "m-container-small m-padded-tb-large">
+        <!--Some error message-->
+        <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}">
+            <i class="ui close icon"></i>
+            <div class="header">Info:</div>
+            <p th:text="${message}">Doing Good</p>
+        </div>
+
+
         <div class="ui container">
             <!--end of filter form-->
             <table class="ui celled table">
@@ -60,8 +68,8 @@
                     <td th:text="${iterStat.count}"></td>
                     <td th:text="${category.name}"></td>
                     <td>
-                        <a href="#" th:href="@{/admin/categories/{id}/input(id=${category.id})}" class="ui mini teal basic button">Edit</a>
-                        <a href="#" th:href="@{/admin/categories/{id}/delete(id=${category.id})}" class="ui mini red basic button">Dele</a>
+                        <a href="#" th:href="@{/admin/categories/{id}/create(id=${category.id})}" class="ui mini teal basic button">Edit</a>
+                        <a href="#" th:href="@{/admin/categories/{id}/delete(id=${category.id})}" class="ui mini red basic button">Delete</a>
                     </td>
                 </tr>
                 </tbody>
@@ -131,6 +139,13 @@
     $('.ui.dropdown').dropdown({
         on: 'hover'
     });
+
+    $('.message .close')
+    .on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    })
 </script>
 </body>
 </html>

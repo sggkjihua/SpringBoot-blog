@@ -1,6 +1,7 @@
 package com.xiaolin.blog.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class Type {
     @Id
     @GeneratedValue
     private Long id;
+    // could add some validation criteria here to verify what goes wrong here
+    @NotBlank(message="Category could not be empty!")
     private String name;
     @OneToMany(mappedBy = "type")
     private List<Blog> blogs = new ArrayList<>();

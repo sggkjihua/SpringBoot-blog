@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 public interface CategoryService {
     Type saveCategory(Type type);
     Type getCategory(Long id);
+    Type getCategoryByName(String name);
     Page<Type> listType(Pageable pageable);
     Type updateType(Long id, Type type);
     void deleteType(Long id);
