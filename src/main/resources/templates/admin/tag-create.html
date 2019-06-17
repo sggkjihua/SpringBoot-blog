@@ -3,7 +3,7 @@
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
+    <title>Tag</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/navigation.css">
     <!--import markdown package-->
@@ -11,7 +11,7 @@
 </head>
 <body>
     <!--导航-->
-    <nav th:replace="admin/_fragments::menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <nav th:replace="admin/_fragments::menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
         <div class="ui container">
             <div class ="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">Management</h2>
@@ -39,8 +39,8 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" th:href="@{/admin/categories/create}" class="teal active item">Post</a>
-                <a href="" th:href="@{/admin/categories}" class="item">List</a>
+                <a href="" th:href="@{/admin/tags/create}" class="teal active item">Post</a>
+                <a href="" th:href="@{/admin/tags}" class="item">List</a>
             </div>
         </div>
     </div>
@@ -52,13 +52,13 @@
     <!--content-->
     <div class = "m-container-small m-padded-tb-large">
         <div class="ui container">
-            <form action=""  method="post" th:action= "${id}==null? @{/admin/categories} : @{/admin/categories/{id}(id=*{id})}" th:object="${type}" class="ui form">
+            <form action=""  method="post" th:action= "${id}==null? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}" th:object="${tag}" class="ui form">
                 <input type="hidden" name="id" th:value="*{id}">
                 <!--tag and category-->
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui teal basic label">Category</label>
-                        <input type="text" name="name" placeholder="Category" th:value="*{name}">
+                        <label class="ui teal basic label">Tag</label>
+                        <input type="text" name="name" placeholder="Tag" th:value="*{name}">
                     </div>
                 </div>
                 <!--error message-->
@@ -137,7 +137,7 @@
                 identifier: 'name',
                 rules: [{
                     type: 'empty',
-                    prompt: 'Please type in a valid Category'
+                    prompt: 'Please type in a valid Tag'
                 }]
             }
         }

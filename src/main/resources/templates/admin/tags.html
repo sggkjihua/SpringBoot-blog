@@ -3,15 +3,13 @@
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
+    <title>Tags</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/navigation.css">
-    <!--import markdown package-->
-    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
 </head>
 <body>
     <!--导航-->
-    <nav th:replace="admin/_fragments::menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <nav th:replace="admin/_fragments::menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
         <div class="ui container">
             <div class ="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">Management</h2>
@@ -26,9 +24,9 @@
                             Marc Xu
                         </div>
                         <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a href="#" class="item">Logout</a>
-                        </div>
+                            <div class="menu">
+                                <a href="#" class="item">Logout</a>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -39,49 +37,67 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" th:href="@{/admin/categories/create}" class="teal active item">Post</a>
-                <a href="" th:href="@{/admin/categories}" class="item">List</a>
+                <a href="" th:href="@{/admin/tags/create}" class="item">Post</a>
+                <a href="" th:href="@{/admin/tags}" class="teal active item">List</a>
             </div>
         </div>
     </div>
 
-    <br>
-    <br>
-    <br>
 
     <!--content-->
     <div class = "m-container-small m-padded-tb-large">
+        <!--Some error message-->
+        <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}">
+            <i class="ui close icon"></i>
+            <div class="header">Info:</div>
+            <p th:text="${message}">Doing Good</p>
+        </div>
+
+
+
+        <!--modify from here to footer-->
+
         <div class="ui container">
-            <form action=""  method="post" th:action= "${id}==null? @{/admin/categories} : @{/admin/categories/{id}(id=*{id})}" th:object="${type}" class="ui form">
-                <input type="hidden" name="id" th:value="*{id}">
-                <!--tag and category-->
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui teal basic label">Category</label>
-                        <input type="text" name="name" placeholder="Category" th:value="*{name}">
-                    </div>
-                </div>
-                <!--error message-->
-                <div class="ui error message"></div>
+            <!--end of filter form-->
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Tag</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
 
-                <!--/*/
-                    <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
-                        <i class="close icon"></i>
-                        <div class="header">Validation Failed</div>
-                    </div>
-                /*/-->
+                <tr th:each="tag,iterStat:${page.content}">
+                    <td th:text="${iterStat.count}"></td>
+                    <td th:text="${tag.name}"></td>
+                    <td>
+                        <a href="#" th:href="@{/admin/tags/{id}/create(id=${tag.id})}" class="ui mini teal basic button">Edit</a>
+                        <a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red basic button">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
 
-
-
-                <!--submit button-->
-                <div class="ui right aligned container">
-                    <button class="ui button" type="button" onclick="window.history.go(-1)">Cancel</button>
-                    <button class="ui teal submit button">Submit</button>
-                </div>
-            </form>
+                <!--end of blogs-->
+                <tfoot>
+                <tr>
+                    <th colspan="6">
+                        <a href="" th:href="@{/admin/tags/create}" class="ui large teal basic button">Add</a>
+                        <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
+                            <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
+                                <i class="left chevron icon"></i>
+                            </a>
+                            <a class="icon item" th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}">
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
-
     <br>
     <br>
     <!--footer-->
@@ -123,25 +139,17 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<!--markdown dependency-->
-<script src="../../static/lib/editormd/editormd.min.js"></script>
-
-    <script>
+<script>
     $('.ui.dropdown').dropdown({
         on: 'hover'
     });
 
-    $('.ui.form').form({
-        fields : {
-            title: {
-                identifier: 'name',
-                rules: [{
-                    type: 'empty',
-                    prompt: 'Please type in a valid Category'
-                }]
-            }
-        }
-    });
+    $('.message .close')
+    .on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    })
 </script>
 </body>
 </html>

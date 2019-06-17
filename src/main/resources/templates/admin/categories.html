@@ -37,7 +37,7 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" th:href="@{/admin/categories/create}" class="item">Publish</a>
+                <a href="" th:href="@{/admin/categories/create}" class="item">Post</a>
                 <a href="" th:href="@{/admin/categories}" class="teal active item">List</a>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 <tfoot>
                 <tr>
                     <th colspan="6">
-                        <a href="" th:href="@{/admin/categories/create}" class="ui large teal basic button">Post</a>
+                        <a href="" th:href="@{/admin/categories/create}" class="ui large teal basic button">Add</a>
                         <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
                             <a class="icon item" th:href="@{/admin/categories(page=${page.number}-1)}" th:unless="${page.first}">
                                 <i class="left chevron icon"></i>
