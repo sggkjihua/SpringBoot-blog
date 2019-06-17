@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -52,5 +54,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteType(Long id) {
         this.categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Type> getAllCategories() {
+        return this.categoryRepository.findAll();
     }
 }
