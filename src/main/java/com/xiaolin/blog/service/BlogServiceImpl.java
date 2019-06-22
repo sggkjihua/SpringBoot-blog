@@ -5,6 +5,7 @@ import com.xiaolin.blog.dao.BlogRepository;
 import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.model.BlogQuery;
 import com.xiaolin.blog.model.Type;
+import com.xiaolin.blog.utils.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -82,7 +83,8 @@ public class BlogServiceImpl implements BlogService {
         Blog res =  this.blogRepository.getOne(id);
         if(res==null) throw new NotFoundException("Blog not exists");
         // otherwise copy and update
-        BeanUtils.copyProperties(blog, res);
+        BeanUtils.copyProperties(blog, res, MyBeanUtils.getNullPropertyNames(blog));
+        res.setUpdateTime(new Date());
         return this.blogRepository.save(res);
     }
 

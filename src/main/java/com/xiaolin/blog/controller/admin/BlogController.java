@@ -58,7 +58,12 @@ public class BlogController {
         blog.setUser((User) httpSession.getAttribute("user"));
         blog.setType(categoryService.getCategory(blog.getType().getId()));
         blog.setTags(tagService.getTags(blog.getTagIds()));
-        Blog savedBlog = this.blogService.saveBlog(blog);
+        Blog savedBlog;
+        if(blog.getId()!=null){
+            savedBlog = this.blogService.updateBlog(blog.getId(), blog);
+        }else{
+            savedBlog = this.blogService.saveBlog(blog);
+        }
         if(savedBlog!=null){
             redirectAttributes.addFlashAttribute("message", "Operation succeed");
         }else{
@@ -81,7 +86,7 @@ public class BlogController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
         this.blogService.deleteBlog(id);
         redirectAttributes.addFlashAttribute("message","Delete Operation Succeed");
-        return "redirect: /admin/blogs";
+        return "redirect:/admin/blogs";
     }
 
 }

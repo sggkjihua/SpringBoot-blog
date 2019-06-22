@@ -53,7 +53,6 @@
             <form id="blog-form" th:object="${blog}" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
                 <input type="hidden" name="published">
                 <input type="hidden" name="id" th:value="*{id}">
-
                 <!--original or not and title-->
                 <div class="required field">
                     <div class="ui left labeled input">
@@ -245,7 +244,7 @@
                 }]
             },
             typeId: {
-                identifier: 'typeId',
+                identifier: 'type.id',
                 rules: [{
                     type: 'empty',
                     prompt: 'Please select the type'
