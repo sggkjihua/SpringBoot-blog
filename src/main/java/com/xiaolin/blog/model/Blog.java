@@ -19,6 +19,9 @@ public class Blog {
     private String firstPicture;
     private String flag;
     private Integer views;
+
+    private String description;
+
     private boolean appreciation;
     private boolean shareStatement;
     private boolean enableComment;
@@ -196,6 +199,16 @@ public class Blog {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 
     public String getTagIds() {
         return tagIds;

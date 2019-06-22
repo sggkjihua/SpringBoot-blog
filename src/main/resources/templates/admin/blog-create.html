@@ -78,6 +78,14 @@
                     </div>
                 </div>
 
+                <!--summary of blog-->
+                <div class="required attached field">
+                    <div style="z-index: 1 !important;">
+                        <textarea name="description" placeholder="Description" style="..." th:text="*{description}"></textarea>
+                    </div>
+                </div>
+
+
                 <!--tag and category-->
                 <div class="two fields">
                     <div class="required field">
@@ -255,6 +263,13 @@
                 rules: [{
                     type: 'empty',
                     prompt: 'Please select the picture'
+                }]
+            },
+            description: {
+                identifier: 'description',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please type in the description'
                 }]
             }
         }
