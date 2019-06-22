@@ -13,6 +13,7 @@ public interface TagService {
     Tag getTagByName(String name);
     Page<Tag> listTag(Pageable pageable);
     List<Tag> getAll();
+    List<Tag> getTop(int size);
     List<Tag> getTags(String ids);
     Tag updateTag(Long id, Tag tag);
     void deleteTag(Long id);

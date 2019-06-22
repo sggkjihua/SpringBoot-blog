@@ -14,4 +14,5 @@ public interface CategoryService {
     Type updateType(Long id, Type type);
     void deleteType(Long id);
     List<Type> getAllCategories();
+    List<Type> getTopCategories(int limit);
 }
