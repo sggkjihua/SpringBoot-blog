@@ -29,9 +29,14 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-        blog.setUpdateTime(new Date());
-        blog.setCreateTime(new Date());
-        blog.setViews(10);
+        // check if the blog is initialized for the first time
+        if(blog.getId()==null){
+            blog.setUpdateTime(new Date());
+            blog.setCreateTime(new Date());
+            blog.setViews(0);
+        }else{
+            blog.setUpdateTime(new Date());
+        }
         return this.blogRepository.save(blog);
     }
 

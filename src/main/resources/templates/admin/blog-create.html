@@ -41,8 +41,8 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" class="item">Publish</a>
-                <a href="" class="teal active item">List</a>
+                <a href="" th:href="@{/admin/blogs/create}" class="teal active item">Publish</a>
+                <a href="" th:href="@{/admin/blogs}" class="teal item">List</a>
             </div>
         </div>
     </div>
@@ -50,30 +50,32 @@
     <!--content-->
     <div class = "m-container-small m-padded-tb-large">
         <div class="ui container">
-            <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
+            <form id="blog-form" th:object="${blog}" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
                 <input type="hidden" name="published">
+                <input type="hidden" name="id" th:value="*{id}">
+
                 <!--original or not and title-->
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact orange basic dropdown label">
-                            <input type="hidden" value="Original">
+                            <input type="hidden" value="Original" name="flag" th:value="*{flag}">
                             <i class="dropdown icon"></i>
                             <div class="text">Original</div>
                             <div class="menu">
                                 <div class="item" data-value="original">Original</div>
                                 <div class="item" data-value="shared">Shared</div>
-                                <div class="item" data-value="translate">translate</div>
+                                <div class="item" data-value="translate">Translation</div>
                             </div>
                         </div>
                         <!-- Title -->
-                        <input type="text" name="title" placeholder="Title">
+                        <input type="text" name="title" placeholder="Title" th:value="*{title}">
                     </div>
                 </div>
 
                 <!--content-->
                 <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
-                        <textarea name="content" placeholder="Content" style="..."></textarea>
+                        <textarea name="content" placeholder="Content" style="..." th:text="*{content}"></textarea>
                     </div>
                 </div>
 
@@ -83,7 +85,7 @@
                         <div class="ui left labeled action input">
                             <label class="ui compact teal basic label">Category</label>
                             <div class="ui fluid selection dropdown">
-                                <input type="hidden" name="type.id">
+                                <input type="hidden" name="type.id" th:value="*{type}!=null ? *{type.id}">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">Categories</div>
                                 <div class="menu">
@@ -98,7 +100,7 @@
                             <label class="ui compact teal basic label">Tag  </label>
                             <!--tags could be multiple selection-->
                             <div class="ui fluid multiple search selection dropdown">
-                                <input type="hidden" name="tagIds">
+                                <input type="hidden" name="tagIds" th:value="*{tagIds}">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">Tags</div>
                                 <div class="menu">
@@ -113,7 +115,7 @@
                 <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui teal basic label">PIC__URL</label>
-                        <input type="text" name="firstPicture" placeholder="Picture">
+                        <input type="text" name="firstPicture" placeholder="Picture" th:value="*{firstPicture}">
 
                     </div>
                 </div>
@@ -121,27 +123,27 @@
                 <div class="inline fields">
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="recommend" name="recommend" class="hidden">
+                            <input type="checkbox" id="recommend" name="recommend" class="hidden" th:checked="*{recommend}">
                             <label for="recommend">Recommend</label>
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="info" name="shareStatement" class="hidden">
+                            <input type="checkbox" id="info" name="shareStatement" class="hidden" th:checked="*{shareStatement}">
                             <label for="info">Info</label>
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="appreciation" name="appreciation" class="hidden">
+                            <input type="checkbox" id="appreciation" name="appreciation" class="hidden" th:checked="*{appreciation}">
                             <label for="appreciation">Appreciation</label>
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="comment" name="enableComment" class="hidden">
+                            <input type="checkbox" id="comment" name="enableComment" class="hidden" th:checked="*{enableComment}">
                             <label for="comment">Comment</label>
                         </div>
                     </div>

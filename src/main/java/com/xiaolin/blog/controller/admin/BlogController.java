@@ -12,9 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -61,12 +59,29 @@ public class BlogController {
         blog.setType(categoryService.getCategory(blog.getType().getId()));
         blog.setTags(tagService.getTags(blog.getTagIds()));
         Blog savedBlog = this.blogService.saveBlog(blog);
-        System.out.println(blog.toString());
-        if(savedBlog==null){
+        if(savedBlog!=null){
             redirectAttributes.addFlashAttribute("message", "Operation succeed");
         }else{
             redirectAttributes.addFlashAttribute("message", "operation failed");
         }
         return "redirect:/admin/blogs";
     }
+
+    @GetMapping("/blogs/{id}/create")
+    public String update(@PathVariable Long id, Model model){
+        Blog blog = this.blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("categories",this.categoryService.getAllCategories());
+        model.addAttribute("blog", blog);
+        model.addAttribute("tags", tagService.getAll());
+        return "/admin/blog-create";
+    }
+
+    @GetMapping("/blogs/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        this.blogService.deleteBlog(id);
+        redirectAttributes.addFlashAttribute("message","Delete Operation Succeed");
+        return "redirect: /admin/blogs";
+    }
+
 }

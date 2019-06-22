@@ -43,6 +43,25 @@ public class Blog {
     private List<Comment> comments = new ArrayList();
 
 
+
+    public void init(){
+        this.tagIds = tagsToIds(this.tags);
+    }
+
+    private String tagsToIds(List<Tag> tags){
+        if(tags.isEmpty()) return tagIds;
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for(Tag t:tags){
+            if(first) first = false;
+            else sb.append(',');
+            sb.append(t.getId());
+        }
+        return sb.toString();
+    }
+
+
+
     public Long getId() {
         return id;
     }

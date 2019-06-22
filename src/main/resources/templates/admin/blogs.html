@@ -37,8 +37,8 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="" class="item">Publish</a>
-                <a href="" class="teal active item">List</a>
+                <a href="" th:href="@{/admin/blogs/create}" class="item">Publish</a>
+                <a href="" th:href="@{/admin/blogs}" class="teal active item">List</a>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
                         <th ></th>
                         <th>Title</th>
                         <th>Category</th>
-                        <th>Recommend</th>
+                        <th>Status</th>
                         <th>Time</th>
                         <th>Operation</th>
                     </tr>
@@ -97,7 +97,7 @@
                         <td th:text="${iterStat.count}">1</td>
                         <td th:text="${blog.title}">How to learn MongoDB</td>
                         <td th:text="${blog.type.name}">MySQL</td>
-                        <td th:text="${blog.recommend}? 'Yes':'No'">Yes</td>
+                        <td th:text="${blog.published}? 'Published':'Saved'">Yes</td>
                         <td th:text="${blog.updateTime}">2017-10-02</td>
                         <td>
                             <a href="#" th:href="@{/admin/blogs/{id}/create(id=${blog.id})}" class="ui mini teal basic button">Edit</a>
