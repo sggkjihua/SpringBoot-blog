@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MainPage</title>
+    <title>Blog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/navigation.css">
     <!--import markdown package-->
@@ -50,7 +50,8 @@
     <!--content-->
     <div class = "m-container-small m-padded-tb-large">
         <div class="ui container">
-            <form action="" class="ui form">
+            <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
+                <input type="hidden" name="published">
                 <!--original or not and title-->
                 <div class="required field">
                     <div class="ui left labeled input">
@@ -70,26 +71,23 @@
                 </div>
 
                 <!--content-->
-                <div class="field">
+                <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
-                        <textarea name="Content"  placeholder="Content">
-
-                        </textarea>
+                        <textarea name="content" placeholder="Content" style="..."></textarea>
                     </div>
                 </div>
 
                 <!--tag and category-->
                 <div class="two fields">
-                    <div class="field">
+                    <div class="required field">
                         <div class="ui left labeled action input">
                             <label class="ui compact teal basic label">Category</label>
                             <div class="ui fluid selection dropdown">
-                                <input type="hidden">
+                                <input type="hidden" name="type.id">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">Categories</div>
                                 <div class="menu">
-                                    <div class="item" data-value="Log">Log</div>
-                                    <div class="item" data-value="Material">Material</div>
+                                    <div th:each ="category: ${categories}" class="item" data-value="1" th:data-value="${category.id}" th:text="${category.name}"></div>
                                 </div>
                             </div>
                         </div>
@@ -100,12 +98,11 @@
                             <label class="ui compact teal basic label">Tag  </label>
                             <!--tags could be multiple selection-->
                             <div class="ui fluid multiple search selection dropdown">
-                                <input type="hidden" name="tag">
+                                <input type="hidden" name="tagIds">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">Tags</div>
                                 <div class="menu">
-                                    <div class="item" data-value="MongoDB">MongoDB</div>
-                                    <div class="item" data-value="MySQL">MySQL</div>
+                                    <div th:each ="tag: ${tags}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}"></div>
                                 </div>
                             </div>
                         </div>
@@ -113,10 +110,10 @@
 
                 </div>
                 
-                <div class="field">
+                <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui teal basic label">Pic__URL</label>
-                        <input type="text" name="Picture" placeholder="Picture">
+                        <label class="ui teal basic label">PIC__URL</label>
+                        <input type="text" name="firstPicture" placeholder="Picture">
 
                     </div>
                 </div>
@@ -124,27 +121,27 @@
                 <div class="inline fields">
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="recommend" name="Recommend" class="hidden">
+                            <input type="checkbox" id="recommend" name="recommend" class="hidden">
                             <label for="recommend">Recommend</label>
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="info" name="Info" class="hidden">
+                            <input type="checkbox" id="info" name="shareStatement" class="hidden">
                             <label for="info">Info</label>
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="appreciation" name="Appreciation" class="hidden">
+                            <input type="checkbox" id="appreciation" name="appreciation" class="hidden">
                             <label for="appreciation">Appreciation</label>
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" id="comment" name="Comment" class="hidden">
+                            <input type="checkbox" id="comment" name="enableComment" class="hidden">
                             <label for="comment">Comment</label>
                         </div>
                     </div>
@@ -155,9 +152,9 @@
 
                 <!--submit button-->
                 <div class="ui right aligned container">
-                    <button class="ui button" type="button" onclick="window.history.go(-1)">Return</button>
-                    <button class="ui secondary button">Save</button>
-                    <button class="ui teal button">Post</button>
+                    <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
+                    <button type="button" id= "save-btn" class="ui secondary button">Save</button>
+                    <button type="button" id = "publish-btn" class="ui teal button">Post</button>
                 </div>
             </form>
         </div>
@@ -166,7 +163,7 @@
     <br>
     <br>
     <!--footer-->
-    <footer class="ui inverted vertical segment m-padded-tb-maxi">
+    <footer th:replace="admin/_fragments::footer" class="ui inverted vertical segment m-padded-tb-maxi">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
@@ -202,11 +199,13 @@
     </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<!--markdown dependency-->
-<script src="../../static/lib/editormd/editormd.min.js"></script>
+    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.min.js"></script>
+    <!--/*/</th:block>/*/-->
 
+    <!--markdown dependency-->
     <!--markdown initialized-->
     <script>
         var Editor;
@@ -215,7 +214,8 @@
                 width   : "100%",
                 height  : 640,
                 syncScrolling : "single",
-                path    : "../../static/lib/editormd/lib/"
+                // path    : "../../static/lib/editormd/lib/",
+                path    : "/lib/editormd/lib/"
             });
         });
     </script>
@@ -234,9 +234,41 @@
                     type: 'empty',
                     prompt: 'Please type in the title'
                 }]
+            },
+            content: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please type in the content'
+                }]
+            },
+            typeId: {
+                identifier: 'typeId',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please select the type'
+                }]
+            },
+            firstPicture: {
+                identifier: 'firstPicture',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please select the picture'
+                }]
             }
         }
     });
+
+    $('#save-btn').click(function () {
+        $('[name="published"]').val(false);
+        $('#blog-form').submit();
+    });
+
+    $('#publish-btn').click(function () {
+        $('[name="published"]').val(true);
+        $('#blog-form').submit();
+    });
+
 </script>
 </body>
 </html>

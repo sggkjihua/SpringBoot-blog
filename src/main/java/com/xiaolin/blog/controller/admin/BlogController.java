@@ -2,8 +2,10 @@ package com.xiaolin.blog.controller.admin;
 
 import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.model.BlogQuery;
+import com.xiaolin.blog.model.User;
 import com.xiaolin.blog.service.BlogService;
 import com.xiaolin.blog.service.CategoryService;
+import com.xiaolin.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -22,10 +27,14 @@ public class BlogController {
     private BlogService blogService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private TagService tagService;
+
     @GetMapping("/blogs")
     public String blogs(@PageableDefault(size=5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
         model.addAttribute("categories",this.categoryService.getAllCategories());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
+        model.addAttribute("tags", tagService.getAll());
         return "/admin/blogs";
     }
 
@@ -38,4 +47,26 @@ public class BlogController {
         return "/admin/blogs :: blogList";
     }
 
+    @GetMapping("/blogs/create")
+    public String create(Model model){
+        model.addAttribute("categories",this.categoryService.getAllCategories());
+        model.addAttribute("blog", new Blog());
+        model.addAttribute("tags", tagService.getAll());
+        return "/admin/blog-create";
+    }
+
+    @PostMapping("/blogs")
+    public String post(Blog blog, RedirectAttributes redirectAttributes, HttpSession httpSession){
+        blog.setUser((User) httpSession.getAttribute("user"));
+        blog.setType(categoryService.getCategory(blog.getType().getId()));
+        blog.setTags(tagService.getTags(blog.getTagIds()));
+        Blog savedBlog = this.blogService.saveBlog(blog);
+        System.out.println(blog.toString());
+        if(savedBlog==null){
+            redirectAttributes.addFlashAttribute("message", "Operation succeed");
+        }else{
+            redirectAttributes.addFlashAttribute("message", "operation failed");
+        }
+        return "redirect:/admin/blogs";
+    }
 }
