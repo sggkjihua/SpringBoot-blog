@@ -22,9 +22,9 @@
     <div class="ui container">
         <div class ="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">Marc</h2>
-            <a href="/" class="item m-mobile-hide" th:classappend="${n==1}? 'active'"><i class="home icon"></i>Main page</a>
-            <a href="/categories" class="item m-mobile-hide" th:classappend="${n==2}? 'active'"><i class="idea icon"></i>Categories</a>
-            <a href="/tags" class="item m-mobile-hide" th:classappend="${n==3}? 'active'"><i class="tags icon"></i>Tag</a>
+            <a href="/" th:href="@{/}" class="item m-mobile-hide" th:classappend="${n==1}? 'active'"><i class="home icon"></i>Main page</a>
+            <a href="/categories/-1" th:href="@{/categories/-1}" class="item m-mobile-hide" th:classappend="${n==2}? 'active'"><i class="idea icon"></i>Categories</a>
+            <a href="" th:href="@{/tags/-1}" class="item m-mobile-hide" th:classappend="${n==3}? 'active'"><i class="tags icon"></i>Tag</a>
             <a href="/archives" class="item m-mobile-hide" th:classappend="${n==4}? 'active'"><i class="clone icon"></i>Arrange</a>
             <a href="/about" class="item m-mobile-hide" th:classappend="${n==5}? 'active'"><i class="info icon"></i>About Me</a>
             <div class="right item m-mobile-hide">

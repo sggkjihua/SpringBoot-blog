@@ -14,6 +14,7 @@ public interface BlogService {
     Blog getBlogByName(String name);
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
     Page<Blog> listBlog(Pageable pageable);
+    Page<Blog> listBlog(Pageable pageable, Long tagId);
     Page<Blog> listSearchResults(String query, Pageable pageable);
     List<Blog> listTopRecommendBlogs(int size);
     Blog updateBlog(Long id, Blog blog);
