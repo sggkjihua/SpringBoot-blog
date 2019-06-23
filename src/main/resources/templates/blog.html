@@ -488,93 +488,38 @@ h5,h6{font-size:1em;}
 
 
             <!--Comment-->
-            <div class="ui bottom attached segment" id="comment-container">
-                <div th:fragment="commentList">
-                    <div class="ui threaded comments">
-
-                    </div>
-                </div>
-                <!-- Comment with mock data-->
-                <div class="ui teal segment">
-                    <div class="ui comments">
-                        <h3 class="ui dividing header">Comments</h3>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/saitama.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">Matt</a>
-                                <div class="metadata">
-                                    <span class="date">Today at 5:42PM</span>
-                                </div>
-                                <div class="text">
-                                    How artistic!
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/jenosjpg.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">Elliot Fu</a>
-                                <div class="metadata">
-                                    <span class="date">Yesterday at 12:30AM</span>
-                                </div>
-                                <div class="text">
-                                    <p>This has been very useful for my research. Thanks as well!</p>
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div>
-                            <div class="comments">
-                                <div class="comment">
-                                    <a class="avatar">
-                                        <img src="../static/images/saitama.jpg">
-                                    </a>
-                                    <div class="content">
-                                        <a class="author">Jenny Hess</a>
-                                        <div class="metadata">
-                                            <span class="date">Just now</span>
-                                        </div>
-                                        <div class="text">
-                                            Elliot you are always so right :)
-                                        </div>
-                                        <div class="actions">
-                                            <a class="reply" data-commentId="1" data-commentName="Jenos" onclick="reply(this)">Reply</a>
-                                        </div>
+            <div class="ui bottom attached segment">
+                <div class="ui teal segment" id="comment-container">
+                    <div th:fragment="commentList">
+                        <div class="ui threaded comments" style="max-width: 100%">
+                            <h3 class="ui dividing header">Comments</h3>
+                            <div class="comment" th:each = "comment: ${comments}">
+                                <a class="avatar">
+                                    <img src="../static/images/saitama.jpg" th:src="@{${comment.avatar}}">
+                                </a>
+                                <div class="content">
+                                    <a class="author" th:text="${comment.name}">Matt</a>
+                                    <div class="metadata">
+                                        <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                    </div>
+                                    <div class="text" th:text="${comment.content}">
+                                        How artistic!
+                                    </div>
+                                    <div class="actions">
+                                        <a class="reply" onclick="reply(this)" data-commentId="1" data-commentName="saitama" th:attr="data-commentid=${comment.id}, data-commentname=${comment.name}">Reply</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/jenosjpg.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">Joe Henderson</a>
-                                <div class="metadata">
-                                    <span class="date">5 days ago</span>
-                                </div>
-                                <div class="text">
-                                    Dude, this is awesome. Thanks so much
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                </div>
 
+                <!-- Comment with mock data-->
                     <!--adding comment area-->
-                    <div class="ui form" id="comment-form">
-                        <input type="text" name="blog.id" th:value="${blog.id}" value="15">
-                        <input type="text" name="parentComment.id" th:value="-1" value="-1">
-                        <div class="field">
+                <div class="ui form" id="comment-form">
+                    <input type="hidden" name="blog.id" th:value="${blog.id}">
+                    <input type="hidden" name="parentComment.id" th:value="-1">
+                    <div class="field">
                             <textarea name="content" placeholder="Please type in your comment..."></textarea>
                         </div>
                         <div class="fields m-margin-b-tiny">
@@ -597,7 +542,6 @@ h5,h6{font-size:1em;}
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <!-- form to submit the comment -->
             </div>
@@ -714,13 +658,14 @@ $('.ui.form').form({
 $('#submit-btn').click(function () {
     var boo = $('.ui.form').form('validate form');
     if (boo) {
-        console.log("Form valid")
+        console.log("Form valid");
+        postData();
     } else {
         console.log("Form invalid");
     }
 
     function postData() {
-        $("#comment-container").load(/*[[@{/comments}]]*/"", {
+        $("#comment-container").load("/comments", {
             "parentComment.id": $("[name='parentComment.id']").val(),
             "blog.id": $("[name='blog.id']").val(),
             "name": $("[name='name']").val(),

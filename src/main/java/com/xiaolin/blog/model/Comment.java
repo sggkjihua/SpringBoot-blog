@@ -16,7 +16,7 @@ public class Comment {
     private String content;
     private String avatar;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdTime;
+    private Date createTime;
 
     @OneToMany(mappedBy = "parentComment" )
     private List<Comment> replyComments = new ArrayList<>();
@@ -68,12 +68,12 @@ public class Comment {
         this.avatar = avatar;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void setCreatedTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Blog getBlog() {
@@ -92,7 +92,7 @@ public class Comment {
                 ", email='" + email + '\'' +
                 ", content='" + content + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", createdTime=" + createdTime +
+                ", createdTime=" + createTime +
                 '}';
     }
     public List<Comment> getReplyComments() {
