@@ -5,6 +5,7 @@ import com.xiaolin.blog.dao.BlogRepository;
 import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.model.BlogQuery;
 import com.xiaolin.blog.model.Type;
+import com.xiaolin.blog.utils.MarkdownUtils;
 import com.xiaolin.blog.utils.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,20 @@ public class BlogServiceImpl implements BlogService {
     public Blog getBlog(Long id) {
         return this.blogRepository.getOne(id);
     }
+
+    @Override
+    public Blog getBlogAsHTML(Long id) {
+        Blog b = this.blogRepository.getOne(id);
+        if(b==null){
+            throw new NotFoundException("Blog does not exist");
+        }
+        Blog copy = new Blog();
+        BeanUtils.copyProperties(b,copy);
+        String content = copy.getContent();
+        copy.setContent(MarkdownUtils.markdownToHTML(b.getContent()));
+        return copy;
+    }
+
     @Transactional
     @Override
     public Blog getBlogByName(String name) {

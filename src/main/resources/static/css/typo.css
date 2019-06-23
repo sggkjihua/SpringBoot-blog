@@ -12,6 +12,11 @@
   padding-right: 4em;
 }
 
+.typo li{
+  font-weight: 300;
+  padding: 4px 0;
+}
+
 
 /* HTML5 媒体文件跟 img 保持一致 */
 .typo audio, .typo canvas, .typo video {

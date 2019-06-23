@@ -18,7 +18,7 @@
 </head>
 <body>
     <!--导航-->
-    <nav class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="_fragments::menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
         <div class="ui container">
             <div class ="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">Marc</h2>
@@ -47,35 +47,35 @@
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">
-                        <img src="../static/images/saitama.jpg" alt="" class="ui avatar image">
+                        <img src="../static/images/saitama.jpg" th:src="@{${blog.user.avatar}}"   alt="" class="ui avatar image">
                         <div class="content">
-                            <a href="#" class="header">Xiaolin Guo</a>
+                            <a href="#" class="header" th:text="${blog.user.name}">Xiaolin Guo</a>
                         </div>
                     </div>
 
                     <div class="item">
-                        <i class="calendar icon"></i>2019.06.15
+                        <i class="calendar icon"></i><span style="vertical-align: middle" th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2019.06.15</span>
                     </div>
-
                     <div class="item">
-                        <i class="eye icon"></i>1923
+                        <i class="eye icon"></i><span style="vertical-align: middle; margin-left: 0.5em" th:text="${blog.views}">1992</span>
                     </div>
-                </div>            </div>
+                </div>
+            </div>
             <!--Image-->
             <div class="ui attached segment">
-                <img src="../static/images/background.jpg" alt="" class="ui fluid rounded image">
+                <img src="../static/images/background.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui fluid rounded image">
             </div>
             <!--Content-->
             <div class="ui attached padded segment">
                 <!--Original sign-->
                 <div class="ui right aligned basic segment">
-                    <div class="ui orange basic label">Original</div>
+                    <div class="ui orange basic label" th:text="${blog.flag}==false? Original: Copy ">Original</div>
                 </div>
                 <!-- Header -->
-                <h2 class="ui center aligned header">About how to learn Spring Boot</h2>
+                <h2 class="ui center aligned header" th:text="${blog.title}">About how to learn Spring Boot</h2>
                 <br>
                 <!--Content-->
-                <div id="content" class="typo js-toc-content">
+                <div id="content" class="typo js-toc-content" th:utext="${blog.content}">
 
                     <pre><code class="language-css">p { color: red }</code></pre>
 
@@ -440,7 +440,7 @@ h5,h6{font-size:1em;}
                 <br>
                 <!--tag-->
                 <div class="m-padded-lr-responsive m-padded-tb-tiny">
-                    <div class="ui basic teal left pointing label">
+                    <div class="ui basic teal left pointing label"  th:each="tag:${blog.tags}" th:text="${tag.name}">
                         MongoDB
                     </div>
                 </div>
@@ -456,11 +456,11 @@ h5,h6{font-size:1em;}
                     <div class="ui orange basic label">
                         <div class="ui images" style="font-size: inherit !important;">
                             <div class="image">
-                                <img src="../static/images/qrcode.jpg" alt="" class="ui rounded bordered image" style="width: 120px;">
+                                <img src="../static/images/qrcode.jpg" th:src ="@{/images/qrcode.jpg}" alt="" class="ui rounded bordered image" style="width: 120px;">
                                 <div>wechat</div>
                             </div>
                             <div class="image">
-                                <img src="../static/images/qrcode.jpg" alt="" class="ui rounded bordered image" style="width: 120px;">
+                                <img src="../static/images/qrcode.jpg" th:src ="@{/images/qrcode.jpg}"alt="" class="ui rounded bordered image" style="width: 120px;">
                                 <div>wechat</div>
                             </div>
 
@@ -473,9 +473,9 @@ h5,h6{font-size:1em;}
                 <div class="ui middle aligned grid">
                     <div class="eleven wide column">
                         <ui class="list">
-                            <li>Author: Jihua Xu</li>
-                            <li>Time: 2019-06-15</li>
-                            <li>Authorization:Unrestrained</li>
+                            <li>Author: <span th:text="${blog.user.name}">Jihua Xu</span></li>
+                            <li>Time: <span style="vertical-align: middle" th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}"></span></li>
+                            <li>Authorization: <span th:text="${blog.shareStatement}"></span></li>
                         </ui>
                     </div>
                     <div class="five wide column">

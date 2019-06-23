@@ -1,5 +1,6 @@
 package com.xiaolin.blog.controller;
 
+import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.service.BlogService;
 import com.xiaolin.blog.service.CategoryService;
 import com.xiaolin.blog.service.TagService;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +43,7 @@ public class IndexController {
         return "search";
     }
 
+
     @RequestMapping("/about")
     public String about() {
         return "about";
@@ -51,8 +54,10 @@ public class IndexController {
         return "archives";
     }
 
-    @RequestMapping("/blog")
-    public String blog() {
+    @RequestMapping("/blog/{id}")
+    public String blog(@PathVariable Long id, Model model) {
+        Blog blog = blogService.getBlogAsHTML(id);
+        model.addAttribute("blog", blog);
         return "blog";
     }
 
