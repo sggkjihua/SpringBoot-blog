@@ -468,6 +468,8 @@ h5,h6{font-size:1em;}
                     </div>
                 </div>
             </div>
+
+
             <!--Info-->
             <div class="ui attached positive message">
                 <div class="ui middle aligned grid">
@@ -479,12 +481,19 @@ h5,h6{font-size:1em;}
                         </ui>
                     </div>
                     <div class="five wide column">
-                        <img src="../static/images/saitama.jpg" alt="" class="ui right floated rounded bordered image" style="width: 110px ">
+                        <img src="../static/images/saitama.jpg" th:src="@{${blog.user.avatar}}" alt="" class="ui right floated rounded bordered image" style="width: 110px; height: auto ">
                     </div>
                 </div>
             </div>
+
+
             <!--Comment-->
             <div class="ui bottom attached segment" id="comment-container">
+                <div th:fragment="commentList">
+                    <div class="ui threaded comments">
+
+                    </div>
+                </div>
                 <!-- Comment with mock data-->
                 <div class="ui teal segment">
                     <div class="ui comments">
@@ -536,7 +545,7 @@ h5,h6{font-size:1em;}
                                             Elliot you are always so right :)
                                         </div>
                                         <div class="actions">
-                                            <a class="reply">Reply</a>
+                                            <a class="reply" data-commentId="1" data-commentName="Jenos" onclick="reply(this)">Reply</a>
                                         </div>
                                     </div>
                                 </div>
@@ -559,42 +568,38 @@ h5,h6{font-size:1em;}
                                 </div>
                             </div>
                         </div>
-                        <form class="ui reply form">
-                            <div class="field">
-                                <textarea></textarea>
+                    </div>
+
+                    <!--adding comment area-->
+                    <div class="ui form" id="comment-form">
+                        <input type="text" name="blog.id" th:value="${blog.id}" value="15">
+                        <input type="text" name="parentComment.id" th:value="-1" value="-1">
+                        <div class="field">
+                            <textarea name="content" placeholder="Please type in your comment..."></textarea>
+                        </div>
+                        <div class="fields m-margin-b-tiny">
+                            <div class="field m-mobile-wide">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="name" placeholder="Name">
+                                </div>
                             </div>
-                            <div class="ui blue labeled submit icon button">
-                                <i class="icon edit"></i> Add Reply
+                            <div class="field  m-margin-b-tiny m-mobile-wide">
+                                <div class="ui left icon input">
+                                    <i class="mail icon"></i>
+                                    <input type="email" name="email" placeholder="Email">
+                                </div>
                             </div>
-                        </form>
+                            <div class="field  m-margin-b-tiny m-mobile-wide">
+                                <button id="submit-btn" type="button" class="ui teal button">
+                                    <i class="edit icon"></i>Submit
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- form to submit the comment -->
-                <div class="ui form">
-                    <div class="field">
-                        <textarea name="content" placeholder="Please type in your comment..."></textarea>
-                    </div>
-                    <div class="fields m-margin-b-tiny">
-                        <div class="field m-mobile-wide">
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
-                                <input type="text" name="name" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="field  m-margin-b-tiny m-mobile-wide">
-                            <div class="ui left icon input">
-                                <i class="mail icon"></i>
-                                <input type="text" name="email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="field  m-margin-b-tiny m-mobile-wide">
-                            <button class="ui teal button">
-                                <i class="edit icon"></i>Post
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -611,7 +616,6 @@ h5,h6{font-size:1em;}
 
     <div class="ui toc-container flowing popup transition hidden" style="width: 250px;">
         <ol class="js-toc">
-
         </ol>
     </div>
 
@@ -660,9 +664,9 @@ h5,h6{font-size:1em;}
     <!--scroll to top -->
     <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
     <!--code-->
-    <script src="../static/lib/prism/prism.js" th:src="/lib/prism/prism.js"></script>
+    <script src="../static/lib/prism/prism.js"></script>
     <!--menu-->
-    <script src="../static/lib/menu-tocbot/tocbot.js" th:src="/lib/menu-tocbot/tocbot.js"></script>
+    <script src="../static/lib/menu-tocbot/tocbot.js"></script>
 </th:block>
 
 <script>
@@ -681,6 +685,72 @@ $('#toTop-button').click(function () {
     $(window).scrollTo(0,500);
 });
 
+$('.ui.form').form({
+    fields : {
+        name: {
+            identifier: 'name',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please type in the name'
+            }]
+        },
+        email: {
+            identifier: 'email',
+            rules: [{
+                type: 'email',
+                prompt: 'Please type in the email'
+            }]
+        },
+        content: {
+            identifier: 'content',
+            rules: [{
+                type: 'empty',
+                prompt: 'Please type in the comment'
+            }]
+        }
+    }
+});
+
+$('#submit-btn').click(function () {
+    var boo = $('.ui.form').form('validate form');
+    if (boo) {
+        console.log("Form valid")
+    } else {
+        console.log("Form invalid");
+    }
+
+    function postData() {
+        $("#comment-container").load(/*[[@{/comments}]]*/"", {
+            "parentComment.id": $("[name='parentComment.id']").val(),
+            "blog.id": $("[name='blog.id']").val(),
+            "name": $("[name='name']").val(),
+            "email": $("[name='email']").val(),
+            "content": $("[name='content']").val()
+        }, function (responseTxt, statusTxt, xhr) {
+            clearInfo();
+            $(window).scrollTo($('#comment-container'), 500);
+        });
+
+        function clearInfo() {
+            $("[name='content']").val('');
+            $("[name='parentComment.id']").val(-1);
+            $("[name='content']").attr("please type in comment...");
+
+        }
+    }
+})
+
+function reply(obj) {
+    var commentId = $(obj).data('commentid');
+    var nickname = $(obj).data('commentname');
+    console.log(commentId)
+    $("[name='content']").attr("placeholder","@"+nickname).focus();
+    $("[name='parentComment.id']").val(commentId);
+    $(window).scrollTo($('#comment-form'), 500);
+}
+
+
+
 <!--menu generator-->
 tocbot.init({
     // Where to render the table of contents.
@@ -690,6 +760,9 @@ tocbot.init({
     // Which headings to grab inside of the contentSelector element.
     headingSelector: 'h1, h2, h3',
 });
+
+
+
 </script>
 
 </body>
