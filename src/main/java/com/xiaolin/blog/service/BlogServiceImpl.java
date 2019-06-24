@@ -47,6 +47,8 @@ public class BlogServiceImpl implements BlogService {
         return this.blogRepository.getOne(id);
     }
 
+
+    @Transactional
     @Override
     public Blog getBlogAsHTML(Long id) {
         Blog b = this.blogRepository.getOne(id);
@@ -55,8 +57,8 @@ public class BlogServiceImpl implements BlogService {
         }
         Blog copy = new Blog();
         BeanUtils.copyProperties(b,copy);
-        String content = copy.getContent();
         copy.setContent(MarkdownUtils.markdownToHTML(b.getContent()));
+        this.blogRepository.updateViews(id);
         return copy;
     }
 

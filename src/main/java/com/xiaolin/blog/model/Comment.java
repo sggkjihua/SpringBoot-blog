@@ -18,6 +18,20 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+    private Boolean admin;
+
     @OneToMany(mappedBy = "parentComment" )
     private List<Comment> replyComments = new ArrayList<>();
 
@@ -84,17 +98,6 @@ public class Comment {
         this.blog = blog;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", content='" + content + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", createdTime=" + createTime +
-                '}';
-    }
     public List<Comment> getReplyComments() {
         return replyComments;
     }
@@ -112,5 +115,19 @@ public class Comment {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", content='" + content + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", createTime=" + createTime +
+                ", admin=" + admin +
+                ", replyComments=" + replyComments +
+                ", parentComment=" + parentComment +
+                ", blog=" + blog +
+                '}';
+    }
 }
