@@ -1,6 +1,5 @@
 package com.xiaolin.blog.controller;
 
-import com.xiaolin.blog.model.BlogQuery;
 import com.xiaolin.blog.model.Tag;
 import com.xiaolin.blog.service.BlogService;
 import com.xiaolin.blog.service.TagService;
@@ -22,7 +21,7 @@ public class TagDisplayController {
     @Autowired
     private TagService tagService;
     @GetMapping("tags/{id}")
-    public String getTags(@PathVariable Long id, @PageableDefault(size=5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String getTags(@PathVariable Long id, @PageableDefault(size=10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                               Model model){
         List<Tag> tags = tagService.getAll();
         if(id==-1){

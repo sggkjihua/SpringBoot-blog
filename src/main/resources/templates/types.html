@@ -112,10 +112,10 @@
             <div class="ui bottom attached segment m-mobile-lr-clear">
                 <div class="ui middle aligned two column grid">
                     <div class="left aligned column">
-                        <a href="#" class="ui mini teal basic button"> Previous Page</a>
+                        <a href="#" th:href="@{${activeId}(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button"> Previous Page</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" class="ui mini teal basic button"> Next Page</a>
+                        <a href="#" th:href="@{${activeId}(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button"> Next Page</a>
                     </div>
                 </div>
             </div>
