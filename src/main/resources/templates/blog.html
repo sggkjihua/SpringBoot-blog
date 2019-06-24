@@ -488,7 +488,7 @@ h5,h6{font-size:1em;}
 
 
             <!--Comment-->
-            <div class="ui bottom attached segment">
+            <div class="ui bottom attached segment" th:if="${blog.enableComment}">
                 <div class="ui teal segment" id="comment-container">
                     <div th:fragment="commentList">
                         <div class="ui threaded comments" style="max-width: 100%">
@@ -683,7 +683,9 @@ h5,h6{font-size:1em;}
     });
 
     $(function () {
-        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"/comments/47");
+        var pid = $("[name='blog.id']").val();
+        console.log(pid);
+        $("#comment-container").load("/comments/"+pid);
     });
 
     $('#submit-btn').click(function () {

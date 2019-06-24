@@ -119,14 +119,14 @@
                                 </div>
 
                                 <div class="right aligned column">
-                                    <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="" th:href="@{/categories/-1}" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="ui teal segment">
                             <div class="ui fluid vertical menu">
-                                <a href="#" class="item"  th:each="category: ${categories}">
+                                <a href="#" th:href="@{categories/{id}(id=${category.id})}" target="_blank" class="item"  th:each="category: ${categories}">
                                     <span th:text="${category.name}">Personal</span>
                                     <div class="ui teal basic left pointing label" th:text="${#arrays.length(category.blogs)}">
                                         <!--here is the number of blogs-->
@@ -147,13 +147,13 @@
                                 </div>
 
                                 <div class="right aligned column">
-                                    <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="" th:href="@{/tags/-1}" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="ui teal segment">
-                            <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny"  th:each="tag: ${tags}">
+                            <a href="#" th:href="@{tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny"  th:each="tag: ${tags}">
                                 <span th:text = "${tag.name}"></span>
                                 <div class="detail" th:text="${#arrays.length(tag.blogs)}">
                                     25
@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="ui segment" th:each="r: ${recommends}">
-                            <a href="#" target="_blank" class="m-black m-text-thin" th:text="${r.title}">
+                            <a href="#" th:href="@{blog/{id}(id=${r.id})}" target="_blank" class="m-black m-text-thin" th:text="${r.title}">
                                 User story {what should be put here}
                             </a>
                         </div>

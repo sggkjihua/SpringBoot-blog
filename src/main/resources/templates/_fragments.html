@@ -25,7 +25,7 @@
             <a href="/" th:href="@{/}" class="item m-mobile-hide" th:classappend="${n==1}? 'active'"><i class="home icon"></i>Main page</a>
             <a href="/categories/-1" th:href="@{/categories/-1}" class="item m-mobile-hide" th:classappend="${n==2}? 'active'"><i class="idea icon"></i>Categories</a>
             <a href="" th:href="@{/tags/-1}" class="item m-mobile-hide" th:classappend="${n==3}? 'active'"><i class="tags icon"></i>Tag</a>
-            <a href="/archives" class="item m-mobile-hide" th:classappend="${n==4}? 'active'"><i class="clone icon"></i>Arrange</a>
+            <a href="/archives" class="item m-mobile-hide" th:classappend="${n==4}? 'active'"><i class="clone icon"></i>Archives</a>
             <a href="/about" class="item m-mobile-hide" th:classappend="${n==5}? 'active'"><i class="info icon"></i>About Me</a>
             <div class="right item m-mobile-hide">
                 <form name="keyWord" th:method="post" action="#" th:action="@{/search}" target="_blank">
@@ -41,7 +41,7 @@
 
 
 <!--footer-->
-<footer th:fragment="footer" id="footer" class="ui inverted vertical segment m-padded-tb-maxi">
+<footer th:fragment="footer" id="footer" class="ui inverted vertical segment m-padded-tb-footer">
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
             <div class="three wide column">
@@ -61,7 +61,7 @@
             <div class="three wide column">
                 <h4 class="ui inverted header">Contact Me</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">Email: der23jihua@gmail.com</a>
+                    <a href="#" class="item" th:text="#{index.email}">Email: der23jihua@gmail.com</a>
                     <a href="#" class="item">Tel: (+1)4379838048</a>
                 </div>
             </div>
