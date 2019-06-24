@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CommentController {
-    static String REDIRECT = "redirect: /comments/";
-
     @Autowired
     private CommentService commentService;
 
@@ -25,22 +23,19 @@ public class CommentController {
     @Value("${comment.avatar}")
     private String avatar;
 
-
     @GetMapping("/comments/{blogId}")
     public String comments(@PathVariable Long blogId, Model model){
-        System.out.println("I seem to come here brfore!");
         model.addAttribute("comments",this.commentService.getComments(blogId));
         return "blog :: commentList";
     }
 
     @PostMapping("/comments")
     public String post(Comment comment){
-        System.out.println(comment.toString());
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId));
         comment.setAvatar(avatar);
         this.commentService.postComment(comment);
-        System.out.println("Did I come here???");
-        return REDIRECT + comment.getId();
+        // do remember that there should not be space after space
+        return "redirect:/comments/"+ blogId;
     }
 }
