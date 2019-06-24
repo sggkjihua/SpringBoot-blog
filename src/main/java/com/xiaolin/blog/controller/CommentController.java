@@ -1,6 +1,5 @@
 package com.xiaolin.blog.controller;
 
-import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.model.Comment;
 import com.xiaolin.blog.service.BlogService;
 import com.xiaolin.blog.service.CommentService;

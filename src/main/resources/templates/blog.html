@@ -509,6 +509,30 @@ h5,h6{font-size:1em;}
                                         <a class="reply" onclick="reply(this)" data-commentId="1" data-commentName="saitama" th:attr="data-commentid=${comment.id}, data-commentname=${comment.name}">Reply</a>
                                     </div>
                                 </div>
+
+                                <!--here is the reply comments-->
+                                <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                                    <div class="comment" th:each = "child: ${comment.replyComments}">
+                                        <a class="avatar">
+                                            <img src="../static/images/saitama.jpg" th:src="@{${child.avatar}}">
+                                        </a>
+                                        <div class="content">
+                                            <a class="author">
+                                                <span th:text="${child.name}">Jihua</span>&nbsp;<span th:text="|@ ${child.parentComment.name}" class="m-teal">@ Xiaolin</span>
+                                            </a>
+                                            <div class="metadata">
+                                                <span class="date" th:text="${#dates.format(child.createTime, 'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                            </div>
+                                            <div class="text" th:text="${child.content}">
+                                                How artistic!
+                                            </div>
+                                            <div class="actions">
+                                                <a class="reply" onclick="reply(this)" data-commentId="1" data-commentName="saitama" th:attr="data-commentid=${child.id}, data-commentname=${child.name}">Reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -520,29 +544,28 @@ h5,h6{font-size:1em;}
                     <input type="hidden" name="blog.id" th:value="${blog.id}">
                     <input type="hidden" name="parentComment.id" th:value="-1">
                     <div class="field">
-                            <textarea name="content" placeholder="Please type in your comment..."></textarea>
+                        <textarea name="content" placeholder="Please type in your comment..."></textarea>
+                    </div>
+                    <div class="fields m-margin-b-tiny">
+                        <div class="field m-mobile-wide">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="name" placeholder="Name">
+                            </div>
                         </div>
-                        <div class="fields m-margin-b-tiny">
-                            <div class="field m-mobile-wide">
-                                <div class="ui left icon input">
-                                    <i class="user icon"></i>
-                                    <input type="text" name="name" placeholder="Name">
-                                </div>
+                        <div class="field  m-margin-b-tiny m-mobile-wide">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <input type="email" name="email" placeholder="Email">
                             </div>
-                            <div class="field  m-margin-b-tiny m-mobile-wide">
-                                <div class="ui left icon input">
-                                    <i class="mail icon"></i>
-                                    <input type="email" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="field  m-margin-b-tiny m-mobile-wide">
-                                <button id="submit-btn" type="button" class="ui teal button">
-                                    <i class="edit icon"></i>Submit
-                                </button>
-                            </div>
+                        </div>
+                        <div class="field  m-margin-b-tiny m-mobile-wide">
+                            <button id="submit-btn" type="button" class="ui teal button">
+                                <i class="edit icon"></i>Submit
+                            </button>
                         </div>
                     </div>
-
+                </div>
                 <!-- form to submit the comment -->
             </div>
         </div>
@@ -684,7 +707,7 @@ h5,h6{font-size:1em;}
             function clearInfo() {
                 $("[name='content']").val('');
                 $("[name='parentComment.id']").val(-1);
-                $("[name='content']").attr("please type in comment...");
+                $("[name='content']").attr("placeholder","Please type in comment...");
             };
         }
     });

@@ -1,6 +1,11 @@
 body {
     background: url("../images/background.jpg");
 }
+
+.m-teal{
+    color: teal !important;
+}
+
 .m-text {
     font-weight: 300 !important;
     letter-spacing: 1px !important;
