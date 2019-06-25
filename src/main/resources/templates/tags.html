@@ -58,7 +58,7 @@
                     <div class="ui mobile reversed stackable grid">
                         <!-- content part-->
                         <div class="eleven wide column">
-                            <h3 class="ui header"><a href="#" class="m-black" th:text="${blog.title}">Why so serious?</a></h3>
+                            <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">Why so serious?</a></h3>
                             <p class="m-text" th:text = "${blog.description}">May be you are currently lost or just do not know how to proceed, but one thing to sure is that if you insist on doing something, you will finally do it</p>
                             <!--information of creator-->
                             <div class="ui grid">

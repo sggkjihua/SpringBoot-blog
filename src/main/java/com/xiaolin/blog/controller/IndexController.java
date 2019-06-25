@@ -63,7 +63,7 @@ public class IndexController {
 
 
     @RequestMapping("/*")
-    public String random(){
+    public String defaultPage(){
         return "index";
     }
 

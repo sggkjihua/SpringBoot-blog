@@ -38,4 +38,9 @@ public class LoginController {
         httpSession.removeAttribute("user");
         return "redirect:/admin";
     }
+
+    @GetMapping("/*")
+    public String defaultPage(){
+        return "admin/index";
+    }
 }
