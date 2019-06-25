@@ -1781,3 +1781,18 @@ org.attoparser.ParseException: (Line = 69, Column = 49) Incomplete structure: "<
 2019-06-26 00:27:08.373  INFO 7916 --- [http-nio-8080-exec-6] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/', method='com.xiaolin.blog.controller.IndexController:index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
 2019-06-26 00:27:08.395  INFO 7916 --- [http-nio-8080-exec-6] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
 2019-06-26 00:27:08.395  INFO 7916 --- [http-nio-8080-exec-6] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-26 00:28:35.502  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/search', method='com.xiaolin.blog.controller.IndexController:search', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}, Time]}
+2019-06-26 00:28:35.514  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
+2019-06-26 00:28:35.514  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-26 00:28:50.439  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/categories/-1', method='com.xiaolin.blog.controller.CategoryDisplayController:getCategory', args=[-1, Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2019-06-26 00:28:50.447  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
+2019-06-26 00:28:50.447  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-26 00:28:51.554  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/', method='com.xiaolin.blog.controller.IndexController:index', args=[Page request [number: 0, size 5, sort: updateTime: DESC], {}]}
+2019-06-26 00:28:51.568  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
+2019-06-26 00:28:51.568  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-26 00:28:53.519  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/blog/70', method='com.xiaolin.blog.controller.IndexController:blog', args=[70, {}]}
+2019-06-26 00:28:53.575  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
+2019-06-26 00:28:53.575  INFO 7916 --- [http-nio-8080-exec-8] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
+2019-06-26 00:28:54.312  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : Request: RequestLogger{ip='0:0:0:0:0:0:0:1', url='http://localhost:8080/comments/70', method='com.xiaolin.blog.controller.CommentController:comments', args=[70, {}]}
+2019-06-26 00:28:54.367  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after-------
+2019-06-26 00:28:54.367  INFO 7916 --- [http-nio-8080-exec-10] com.xiaolin.blog.aspect.LogAspect        : -------do after returning-------
