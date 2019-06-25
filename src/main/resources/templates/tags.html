@@ -41,19 +41,19 @@
                         <h3 class="ui teal header">Tags</h3>
                     </div>
                     <div class="right aligned column">
-                        Total <h3 class="ui orange header m-inline-block m-text-thin"  th:text="${page.totalElements}">14</h3>
+                        Total&nbsp;<h3 class="ui orange header m-inline-block m-text-thin"  th:text="${page.totalElements}">14</h3>
                     </div>
                 </div>
             </div>
 
             <!--tags examples-->
-            <div class="ui attached segment m-mobile-lr-clear" >
+            <div class="ui attached teal segment m-mobile-lr-clear" >
                 <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing large label m-margin-tb-tiny" th:classappend="${activeId==tag.id}? 'teal'" th:each="tag:${tags}">
                     <span th:text="${tag.name}">Jihua</span>
                 </a>
             </div>
 
-            <div class="ui attached segment">
+            <div class="ui attached teal segment">
                 <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear" th:each="blog: ${page.content}">
                     <div class="ui mobile reversed stackable grid">
                         <!-- content part-->
@@ -66,9 +66,9 @@
                                     <div class="eleven wide column">
                                         <div class="ui mini horizontal link list">
                                             <div class="item">
-                                                <img src="../static/images/saitama.jpg" th:src="@{/images/saitama.jpg}" alt="../static/images/saitama.jpg" class="ui avatar image">
+                                                <img src="../static/images/saitama.jpg" th:src="@{${blog.user.avatar}}" alt="../static/images/saitama.jpg" class="ui avatar image">
                                                 <div class="content">
-                                                    <a href="#" class="header" th:text="${blog.user.name}">Xiaolin Guo</a>
+                                                    <a class="header" th:text="${blog.user.name}">Xiaolin Guo</a>
                                                 </div>
                                             </div>
 
@@ -82,13 +82,13 @@
                                         </div>
                                     </div>
                                     <div class="right aligned five wide column">
-                                        <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">NodeJS</a>
+                                        <a href="#" th:href="@{/categories/{id}(id= ${blog.type.id})}" class="ui teal basic label m-padded-mini m-text-thin" th:text="${blog.type.name}">NodeJS</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <!--tag examples-->
                                     <div class="column" >
-                                        <a href="#" target="_blank" th:each="tag: ${blog.tags}" th:text="${tag.name}"
+                                        <a th:href="@{/tags/{id}(id=${tag.id})}" th:each="tag: ${blog.tags}" th:text="${tag.name}"
                                            class="ui basic left pointing label m-margin-tb-tiny m-padded-tb-small m-text-thin"
                                            th:classappend="${tag.id==activeId}? 'teal'">
                                             MongoDB
@@ -101,7 +101,7 @@
                         <!-- image part-->
                         <div class="five wide column">
                             <a herf="#" target="_blank">
-                                <img src="../static/images/saitama.jpg" th:src="@{/images/saitama.jpg}" alt="" class="ui rounded image blog-image">
+                                <img src="../static/images/saitama.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image image-large">
                             </a>
                         </div>
                     </div>

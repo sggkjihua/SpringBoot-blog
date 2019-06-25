@@ -62,4 +62,9 @@ public class IndexController {
     }
 
 
+    @RequestMapping("/*")
+    public String random(){
+        return "index";
+    }
+
 }

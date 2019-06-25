@@ -37,6 +37,7 @@ public class CommentController {
         comment.setBlog(blogService.getBlog(blogId));
         comment.setAvatar(avatar);
         User user = (User)session.getAttribute("user");
+
         if(user==null)comment.setAdmin(false);
         else{
             comment.setAdmin(true);

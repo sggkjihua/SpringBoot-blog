@@ -63,7 +63,7 @@
             </div>
             <!--Image-->
             <div class="ui attached segment">
-                <img src="../static/images/background.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui fluid rounded image">
+                <img src="../static/images/background.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui fluid rounded image" style="max-height: 30em">
             </div>
             <!--Content-->
             <div class="ui attached padded segment">
@@ -494,8 +494,8 @@ h5,h6{font-size:1em;}
                         <div class="ui threaded comments" style="max-width: 100%">
                             <h3 class="ui dividing header">Comments</h3>
                             <div class="comment" th:each = "comment: ${comments}">
-                                <a class="avatar">
-                                    <img src="../static/images/saitama.jpg" th:src="@{${comment.avatar}}">
+                                <a class="ui avatar">
+                                    <img class="ui avatar" src="../../static/images/header.jpg" th:src="@{${comment.avatar}}">
                                 </a>
                                 <div class="content">
                                     <a class="author" th:text="${comment.name}">Jihua</a>
