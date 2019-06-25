@@ -66,7 +66,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Type> getTopCategories(int size) {
         Sort sort = new Sort(Sort.Direction.DESC, "blogs.size");
-        Pageable pageable = new PageRequest(0,size, sort);
+        //Pageable pageable = new PageRequest(0,size, sort);
+        Pageable pageable = PageRequest.of(0, size, Sort.by(Sort.Direction.DESC, "blogs.size"));
         return this.categoryRepository.findTop(pageable);
     }
 }
