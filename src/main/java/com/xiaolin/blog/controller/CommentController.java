@@ -35,9 +35,8 @@ public class CommentController {
     public String post(Comment comment, HttpSession session){
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId));
-        comment.setAvatar(avatar);
+        comment.setAvatar(avatar+comment.getAvatar()+".jpg");
         User user = (User)session.getAttribute("user");
-
         if(user==null)comment.setAdmin(false);
         else{
             comment.setAdmin(true);

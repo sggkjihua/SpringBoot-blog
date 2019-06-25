@@ -564,49 +564,46 @@ h5,h6{font-size:1em;}
                         </div>
 
 
-
                         <div class="field m-margin-b-tiny m-mobile-wide" style="margin-top: 0.7em !important;">
                             <div class="ui inline dropdown item">
                                 <div class="text">
-                                    <input type="image" class="ui avatar image" src="../static/images/8.jpg" th:data-value="/images/8.jpg">
+                                    <input type="image" name="avatar" class="ui avatar image" src="../static/images/8.jpg" th:src="@{/images/8.jpg}" th:value="8">
                                 </div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu" style="width: 4em;">
-                                    <div class="item">
-                                        <img class="ui avatar image" src="../static/images/1.jpg" th:data-value="/images/1.jpg">
+                                    <div class="item"  th:data-value="1">
+                                        <img class="ui avatar image" src="../static/images/1.jpg"  th:src="@{/images/1.jpg}" data-value="1" th:data-value="1">
+                                    </div>
+                                    <div class="item"  th:data-value="1">
+                                        <img class="ui avatar image" src="../static/images/2.jpg" th:src="@{/images/2.jpg}" th:data-value="2">
+                                    </div>
+                                    <div class="item"  th:data-value="1">
+                                        <img class="ui avatar image" src="../static/images/3.jpg" th:src="@{/images/3.jpg}" th:data-value="3">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/2.jpg" th:data-value="/images/2.jpg">
+                                        <img class="ui avatar image" src="../static/images/4.jpg" th:src="@{/images/4.jpg}" th:data-value="4">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/3.jpg" th:data-value="/images/3.jpg">
+                                        <img class="ui avatar image" src="../static/images/5.jpg" th:src="@{/images/5.jpg}" th:data-value="5">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/4.jpg" th:data-value="/images/4.jpg">
+                                        <img class="ui avatar image" src="../static/images/6.jpg" th:src="@{/images/6.jpg}" th:data-value="6">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/5.jpg" th:data-value="/images/5.jpg">
+                                        <img class="ui avatar image" src="../static/images/7.jpg" th:src="@{/images/7.jpg}" th:data-value="7">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/6.jpg" th:data-value="/images/6.jpg">
+                                        <img class="ui avatar image" src="../static/images/8.jpg" th:src="@{/images/8.jpg}" th:data-value="8">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/7.jpg" th:data-value="/images/7.jpg">
+                                        <img class="ui avatar image" src="../static/images/9.jpg" th:src="@{/images/9.jpg}" th:data-value="9">
                                     </div>
                                     <div class="item">
-                                        <img class="ui avatar image" src="../static/images/8.jpg" th:data-value="/images/8.jpg">
-                                    </div>
-                                    <div class="item">
-                                        <img class="ui avatar image" src="../static/images/9.jpg" th:data-value="/images/9.jpg">
-                                    </div>
-                                    <div class="item">
-                                        <img class="ui avatar image" src="../static/images/10.jpg" th:data-value="/images/10.jpg">
+                                        <img class="ui avatar image" src="../static/images/10.jpg" th:src="@{/images/10.jpg}" th:data-value="10">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
 
 
                         <div class="field  m-margin-b-tiny m-mobile-wide">
@@ -725,6 +722,13 @@ h5,h6{font-size:1em;}
                     type: 'empty',
                     prompt: 'Please type in the comment'
                 }]
+            },
+            avatar:{
+                identifier:'avatar',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please choose an avatar'
+                }]
             }
         }
     });
@@ -751,6 +755,7 @@ h5,h6{font-size:1em;}
                 "name": $("[name='name']").val(),
                 "email": $("[name='email']").val(),
                 "content": $("[name='content']").val(),
+                "avatar" : $("[name='avatar']").val()
             }, function (responseTxt, statusTxt, xhr) {
                 clearInfo();
             });
@@ -774,9 +779,11 @@ h5,h6{font-size:1em;}
 
     $('.ui.dropdown')
         .dropdown({
-            direction: 'upward'
-        })
-    ;
+            direction: 'upward',
+        });
+
+
+
     <!--menu generator-->
     tocbot.init({
         // Where to render the table of contents.
