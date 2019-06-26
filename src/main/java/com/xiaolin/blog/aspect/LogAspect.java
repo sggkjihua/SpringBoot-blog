@@ -1,6 +1,4 @@
 package com.xiaolin.blog.aspect;
-
-import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
