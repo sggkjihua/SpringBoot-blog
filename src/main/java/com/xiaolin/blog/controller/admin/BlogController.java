@@ -33,7 +33,7 @@ public class BlogController {
         model.addAttribute("categories",this.categoryService.getAllCategories());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         model.addAttribute("tags", tagService.getAll());
-        return "/admin/blogs";
+        return "admin/blogs";
     }
 
     @PostMapping("/blogs/search")
@@ -42,7 +42,7 @@ public class BlogController {
          * here you get the blogQuery object from html file javascript
          */
         model.addAttribute("page", blogService.listBlog(pageable, blog));
-        return "/admin/blogs :: blogList";
+        return "admin/blogs :: blogList";
     }
 
     @GetMapping("/blogs/create")
@@ -50,7 +50,7 @@ public class BlogController {
         model.addAttribute("categories",this.categoryService.getAllCategories());
         model.addAttribute("blog", new Blog());
         model.addAttribute("tags", tagService.getAll());
-        return "/admin/blog-create";
+        return "admin/blog-create";
     }
 
     @PostMapping("/blogs")
@@ -79,7 +79,7 @@ public class BlogController {
         model.addAttribute("categories",this.categoryService.getAllCategories());
         model.addAttribute("blog", blog);
         model.addAttribute("tags", tagService.getAll());
-        return "/admin/blog-create";
+        return "admin/blog-create";
     }
 
     @GetMapping("/blogs/{id}/delete")

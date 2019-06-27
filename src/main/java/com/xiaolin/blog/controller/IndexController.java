@@ -10,10 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class IndexController {
@@ -34,8 +31,16 @@ public class IndexController {
     }
 
     @PostMapping("/search")
-    public String search(@PageableDefault(size=5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size=15, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          Model model, @RequestParam String query){
+        model.addAttribute("page", blogService.listSearchResults("%"+query+"%", pageable));
+        model.addAttribute("query", query);
+        return "search";
+    }
+
+    @GetMapping("/search/{query}")
+    public String searchPager(@PageableDefault(size=1, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                         Model model, @PathVariable String query){
         model.addAttribute("page", blogService.listSearchResults("%"+query+"%", pageable));
         model.addAttribute("query", query);
         return "search";

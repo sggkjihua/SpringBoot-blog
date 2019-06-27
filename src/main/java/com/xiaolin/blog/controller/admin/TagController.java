@@ -28,19 +28,19 @@ public class TagController {
     public String getTags(@PageableDefault(size=10,sort={"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                                 Model model){
         model.addAttribute("page", this.tagService.listTag(pageable));
-        return "/admin/tags";
+        return "admin/tags";
     }
 
     @GetMapping("/tags/create")
     public String createNewTag(Model model) {
         model.addAttribute("tag", new Tag());
-        return "/admin/tag-create";
+        return "admin/tag-create";
     }
 
     @GetMapping("/tags/{id}/create")
     public String getTag(Model model, @PathVariable Long id){
         model.addAttribute("tag", this.tagService.getTag(id));
-        return "/admin/tag-create";
+        return "admin/tag-create";
     }
 
     @PostMapping("/tags")

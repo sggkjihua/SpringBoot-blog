@@ -28,19 +28,19 @@ public class CategoryController {
     public String getCategories(@PageableDefault(size=10,sort={"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                                 Model model){
         model.addAttribute("page", this.categoryService.listType(pageable));
-        return "/admin/categories";
+        return "admin/categories";
     }
 
     @GetMapping("/categories/create")
     public String createNewCategory(Model model) {
         model.addAttribute("type", new Type());
-        return "/admin/category-create";
+        return "admin/category-create";
     }
 
     @GetMapping("/categories/{id}/create")
     public String getCategory(Model model, @PathVariable Long id){
         model.addAttribute("type", this.categoryService.getCategory(id));
-        return "/admin/category-create";
+        return "admin/category-create";
     }
 
     @PostMapping("/categories")
