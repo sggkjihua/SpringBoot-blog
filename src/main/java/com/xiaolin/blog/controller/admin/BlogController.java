@@ -82,6 +82,7 @@ public class BlogController {
         return "admin/blog-create";
     }
 
+
     @GetMapping("/blogs/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
         this.blogService.deleteBlog(id);

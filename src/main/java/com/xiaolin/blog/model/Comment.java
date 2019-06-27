@@ -1,5 +1,7 @@
 package com.xiaolin.blog.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;

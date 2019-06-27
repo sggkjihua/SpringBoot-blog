@@ -7,6 +7,8 @@ import com.xiaolin.blog.model.BlogQuery;
 import com.xiaolin.blog.model.Type;
 import com.xiaolin.blog.utils.MarkdownUtils;
 import com.xiaolin.blog.utils.MyBeanUtils;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -148,6 +150,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Transactional
+    @Cascade(CascadeType.DELETE)
     @Override
     public void deleteBlog(Long id) {
         this.blogRepository.deleteById(id);

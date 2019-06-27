@@ -1,5 +1,7 @@
 package com.xiaolin.blog.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class Type {
     @NotBlank(message="Category could not be empty!")
     private String name;
     @OneToMany(mappedBy = "type")
+    @Cascade(CascadeType.REMOVE)
     private List<Blog> blogs = new ArrayList<>();
     public Type(){
 

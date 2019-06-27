@@ -1,6 +1,8 @@
 package com.xiaolin.blog.model;
 
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,17 +34,24 @@ public class Blog {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
+
     @Transient
     private String tagIds;
 
     @ManyToOne
     private Type type;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany()
+    @Cascade(CascadeType.PERSIST)
     private List<Tag> tags = new ArrayList<>();
 
     @ManyToOne
     private User user;
+
+    /**
+     * need to add CascadeType.Remove here so as to delete all related comments
+     */
     @OneToMany(mappedBy = "blog")
+    @Cascade(CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList();
 
 

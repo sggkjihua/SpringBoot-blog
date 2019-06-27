@@ -14,6 +14,7 @@ public class Tag {
     @NotBlank(message="Tag could not be empty!")
     private String name;
 
+
     @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
 
