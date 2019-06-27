@@ -1,5 +1,6 @@
 package com.xiaolin.blog.controller.admin;
 
+import com.xiaolin.blog.Exception.NotFoundException;
 import com.xiaolin.blog.model.Blog;
 import com.xiaolin.blog.model.BlogQuery;
 import com.xiaolin.blog.model.User;
@@ -75,6 +76,9 @@ public class BlogController {
     @GetMapping("/blogs/{id}/create")
     public String update(@PathVariable Long id, Model model){
         Blog blog = this.blogService.getBlog(id);
+        if(blog==null){
+            throw new NotFoundException("Blog does not exist");
+        }
         blog.init();
         model.addAttribute("categories",this.categoryService.getAllCategories());
         model.addAttribute("blog", blog);
