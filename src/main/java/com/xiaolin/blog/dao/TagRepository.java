@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
-    public Tag findByName(String name);
+    Tag findByName(String name);
     @Query("select t from Tag t")
-    public List<Tag> getTop(Pageable pageable);
-
-
+    List<Tag> getTop(Pageable pageable);
 }

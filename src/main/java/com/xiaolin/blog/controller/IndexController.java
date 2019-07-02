@@ -64,7 +64,6 @@ public class IndexController {
         return "blog";
     }
 
-
     @RequestMapping("/*")
     public String defaultPage(){
         return "index";

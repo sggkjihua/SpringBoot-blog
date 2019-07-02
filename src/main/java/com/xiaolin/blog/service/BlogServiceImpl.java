@@ -62,12 +62,6 @@ public class BlogServiceImpl implements BlogService {
         return copy;
     }
 
-    @Transactional
-    @Override
-    public Blog getBlogByName(String name) {
-        return null;
-    }
-
     /**
      * Dynamically adding the criteria into the query
      * */

@@ -112,10 +112,10 @@
                         <th colspan="6">
                             <a href="" th:href="@{/admin/blogs/create}" class="ui large teal basic button">Post</a>
                             <div class="ui right floated pagination menu">
-                                <a onclick="page(this)" th:attr = "data-page=$(page.number-1)"  th:unless="${page.first}" class="icon item">
+                                <a onclick="page(this)" th:attr = "data-page=${page.number-1}"  th:unless="${page.first}" class="icon item">
                                     <i class="left chevron icon"></i>
                                 </a>
-                                <a onclick="page(this)" th:attr = "data-page=$(page.number+1)" th:unless="${page.last}" class="icon item">
+                                <a onclick="page(this)" th:attr = "data-page=${page.number+1}" th:unless="${page.last}" class="icon item">
                                     <i class="right chevron icon"></i>
                                 </a>
                             </div>

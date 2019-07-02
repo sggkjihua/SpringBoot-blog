@@ -13,7 +13,6 @@ public interface BlogService {
     Blog saveBlog(Blog blog);
     Blog getBlog(Long id);
     Blog getBlogAsHTML(Long id);
-    Blog getBlogByName(String name);
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
     Page<Blog> listBlog(Pageable pageable);
     Page<Blog> listBlog(Pageable pageable, Long tagId);
